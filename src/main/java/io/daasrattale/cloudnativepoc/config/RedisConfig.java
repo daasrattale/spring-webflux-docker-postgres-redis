@@ -1,6 +1,6 @@
 package io.daasrattale.cloudnativepoc.config;
 
-import io.daasrattale.cloudnativepoc.book.Book;
+import io.daasrattale.cloudnativepoc.movie.Movie;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
@@ -11,12 +11,12 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 @Configuration
 public class RedisConfig {
     @Bean
-    public ReactiveRedisTemplate<String, Book> reactiveRedisTemplate(ReactiveRedisConnectionFactory factory) {
-        Jackson2JsonRedisSerializer<Book> serializer = new Jackson2JsonRedisSerializer<>(Book.class);
+    public ReactiveRedisTemplate<String, Movie> reactiveRedisTemplate(ReactiveRedisConnectionFactory factory) {
+        Jackson2JsonRedisSerializer<Movie> serializer = new Jackson2JsonRedisSerializer<>(Movie.class);
 
-        RedisSerializationContext.RedisSerializationContextBuilder<String, Book> builder =
+        RedisSerializationContext.RedisSerializationContextBuilder<String, Movie> builder =
                 RedisSerializationContext.newSerializationContext(new Jackson2JsonRedisSerializer<>(String.class));
-        RedisSerializationContext<String, Book> context = builder.value(serializer).build();
+        RedisSerializationContext<String, Movie> context = builder.value(serializer).build();
 
         return new ReactiveRedisTemplate<>(factory, context);
     }
